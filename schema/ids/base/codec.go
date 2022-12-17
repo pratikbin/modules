@@ -6,19 +6,19 @@ package base
 import (
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	"github.com/AssetMantle/modules/schema"
+	codecUtilities "github.com/AssetMantle/modules/utilities/codec"
 )
 
-func RegisterCodec(codec *codec.LegacyAmino) {
-	schema.RegisterModuleConcrete(codec, AssetID{})
-	schema.RegisterModuleConcrete(codec, ClassificationID{})
-	schema.RegisterModuleConcrete(codec, DataID{})
-	schema.RegisterModuleConcrete(codec, HashID{})
-	schema.RegisterModuleConcrete(codec, IdentityID{})
-	schema.RegisterModuleConcrete(codec, MaintainerID{})
-	schema.RegisterModuleConcrete(codec, OrderID{})
-	schema.RegisterModuleConcrete(codec, OwnableID{})
-	schema.RegisterModuleConcrete(codec, PropertyID{})
-	schema.RegisterModuleConcrete(codec, SplitID{})
-	schema.RegisterModuleConcrete(codec, StringID{})
+func RegisterLegacyAminoCodec(legacyAmino *codec.LegacyAmino) {
+	codecUtilities.RegisterModuleConcrete(legacyAmino, assetID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, classificationID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, dataID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, hashID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, identityID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, maintainerID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, orderID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, ownableID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, propertyID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, splitID{})
+	codecUtilities.RegisterModuleConcrete(legacyAmino, stringID{})
 }

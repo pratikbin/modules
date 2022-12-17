@@ -4,40 +4,35 @@
 package key
 
 import (
-	"github.com/AssetMantle/modules/modules/metas/module/module"
-	"github.com/AssetMantle/modules/schema"
+	"github.com/cosmos/cosmos-sdk/codec"
+
+	"github.com/AssetMantle/modules/modules/metas/internal/module"
 	"github.com/AssetMantle/modules/schema/errors/constants"
 	"github.com/AssetMantle/modules/schema/helpers"
 	"github.com/AssetMantle/modules/schema/ids"
-	"github.com/AssetMantle/modules/schema/ids/base"
-	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/cosmos-sdk/codec/types"
+	codecUtilities "github.com/AssetMantle/modules/utilities/codec"
 )
 
 type key struct {
-	ids.ID
+	ids.DataID
 }
 
 var _ helpers.Key = (*key)(nil)
 
-func (key key) RegisterInterfaces(registry types.InterfaceRegistry) {
-	registry.RegisterInterface("KeyName", (*helpers.Key)(nil))
-}
-
 func (key key) GenerateStoreKeyBytes() []byte {
 	return module.StoreKeyPrefix.GenerateStoreKey(key.Bytes())
 }
-func (key) RegisterCodec(codec *codec.LegacyAmino) {
-	schema.RegisterModuleConcrete(codec, key{})
+func (key) RegisterLegacyAminoCodec(legacyAmino *codec.LegacyAmino) {
+	codecUtilities.RegisterModuleConcrete(legacyAmino, key{})
 }
 func (key key) IsPartial() bool {
-	return key.ID.(*base.ID).GetDataID().HashId == nil
+	return len(key.DataID.GetHashID().Bytes()) == 0
 }
 func (key key) Equals(compareKey helpers.Key) bool {
 	if CompareKey, err := keyFromInterface(compareKey); err != nil {
 		return false
 	} else {
-		return key.ID.Compare(CompareKey.ID) == 0
+		return key.DataID.Compare(CompareKey.DataID) == 0
 	}
 }
 func keyFromInterface(i interface{}) (key, error) {
@@ -49,9 +44,9 @@ func keyFromInterface(i interface{}) (key, error) {
 	}
 }
 
-func NewKey(dataID ids.ID) helpers.Key {
+func NewKey(dataID ids.DataID) helpers.Key {
 	return key{
-		ID: dataID,
+		DataID: dataID,
 	}
 }
 
