@@ -23,4 +23,5 @@ type Query interface {
 	Service() (*grpc.ServiceDesc, interface{})
 	Initialize(Mapper, Parameters, ...interface{}) Query
 	GetGRPCConfigurator() GRPCConfigurator
+	GetKeeper() Keeper
 }

@@ -7,6 +7,6 @@ import (
 )
 
 type GRPCConfigurator interface {
-	ConfigureGRPCServer(cfg sdkModuleTypes.Configurator)
+	ConfigureGRPCServer(cfg sdkModuleTypes.Configurator, keeper Keeper)
 	ConfigureGRPCGatewayHandler(clientCtx client.Context, mux *runtime.ServeMux)
 }

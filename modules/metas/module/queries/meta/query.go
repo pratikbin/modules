@@ -20,8 +20,8 @@ type Configurator struct{}
 
 var _ helpers.GRPCConfigurator = &Configurator{}
 
-func (c Configurator) ConfigureGRPCServer(cfg sdkModuleTypes.Configurator) {
-	RegisterQueryServer(cfg.QueryServer(), queryKeeper{})
+func (c Configurator) ConfigureGRPCServer(cfg sdkModuleTypes.Configurator, keeper helpers.Keeper) {
+	RegisterQueryServer(cfg.QueryServer(), keeper.(queryKeeper))
 }
 
 func (c Configurator) ConfigureGRPCGatewayHandler(clientCtx client.Context, mux *runtime.ServeMux) {

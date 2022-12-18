@@ -19,16 +19,16 @@ type queryKeeper struct {
 var _ helpers.QueryKeeper = (*queryKeeper)(nil)
 var _ QueryServer = &queryKeeper{}
 
+func (queryKeeper queryKeeper) mustEmbedUnimplementedQueryServer() {
+	// TODO implement me
+	panic("implement me")
+}
+
 func (queryKeeper queryKeeper) Meta(ctx context.Context, request *QueryRequest) (*QueryResponse, error) {
 	sdkCtx := sdkTypes.UnwrapSDKContext(ctx)
 	response := queryKeeper.Enquire(sdkCtx, request)
 	//TODO: QueryResponse already contains error, no need to add separately
 	return response.(*QueryResponse), nil
-}
-
-func (queryKeeper queryKeeper) mustEmbedUnimplementedQueryServer() {
-	// TODO implement me
-	panic("implement me")
 }
 
 func (queryKeeper queryKeeper) Enquire(context sdkTypes.Context, queryRequest helpers.QueryRequest) helpers.QueryResponse {

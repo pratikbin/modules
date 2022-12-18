@@ -31,6 +31,9 @@ type query struct {
 
 var _ helpers.Query = (*query)(nil)
 
+func (query query) GetKeeper() helpers.Keeper {
+	return query.queryKeeper
+}
 func (query query) GetGRPCConfigurator() helpers.GRPCConfigurator {
 	return query.Configurator
 }

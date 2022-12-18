@@ -180,15 +180,15 @@ func (module module) LegacyQuerierHandler(_ *codec.LegacyAmino) sdkTypes.Querier
 	}
 }
 func (module module) RegisterServices(configurator sdkModuleTypes.Configurator) {
-	for _, query := range module.queriesPrototype().GetList() {
+	for _, query := range module.queries.GetList() {
 		// configurator.QueryServer().RegisterService(query.Service())
-		query.GetGRPCConfigurator().ConfigureGRPCServer(configurator)
+		query.GetGRPCConfigurator().ConfigureGRPCServer(configurator, query.GetKeeper())
 	}
-
-	for _, transaction := range module.transactionsPrototype().GetList() {
-		//configurator.MsgServer().RegisterService(transaction.Service())
-		transaction.GetGRPCConfigurator().ConfigureGRPCServer(configurator)
-	}
+	//TODO: Transaction maps all requests to transactionserver and not just REST
+	//for _, transaction := range module.transactionsPrototype().GetList() {
+	//	//configurator.MsgServer().RegisterService(transaction.Service())
+	//	transaction.GetGRPCConfigurator().ConfigureGRPCServer(configurator)
+	//}
 }
 func (module module) ConsensusVersion() uint64 {
 	return module.consensusVersion

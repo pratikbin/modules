@@ -17,8 +17,8 @@ type Configurator struct{}
 
 var _ helpers.GRPCConfigurator = &Configurator{}
 
-func (c Configurator) ConfigureGRPCServer(cfg sdkModuleTypes.Configurator) {
-	RegisterTransactionServer(cfg.MsgServer(), transactionKeeper{})
+func (c Configurator) ConfigureGRPCServer(cfg sdkModuleTypes.Configurator, keeper helpers.Keeper) {
+	RegisterTransactionServer(cfg.MsgServer(), keeper.(transactionKeeper))
 }
 
 func (c Configurator) ConfigureGRPCGatewayHandler(clientCtx client.Context, mux *runtime.ServeMux) {
