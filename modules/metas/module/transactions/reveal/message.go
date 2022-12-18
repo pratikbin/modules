@@ -26,7 +26,7 @@ func (message *Message) RegisterInterfaces(registry types.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdkTypes.Msg)(nil),
 		&Message{},
 	)
-	registry.RegisterInterface("lolname", (*data.Data)(nil), &base.Data{})
+	//registry.RegisterInterface("lolname", (*data.Data)(nil), &base.Data{})
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Transaction_serviceDesc)
 }

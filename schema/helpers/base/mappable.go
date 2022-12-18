@@ -19,7 +19,7 @@ func (m *Mappable) RegisterCodec(amino *codec.LegacyAmino) {
 }
 
 func (m *Mappable) RegisterInterfaces(registry types.InterfaceRegistry) {
-	registry.RegisterInterface("mappable", (*helpers.Mappable)(nil), &Mappable{})
-	registry.RegisterInterface("IsMappable", (*isMappable_Impl)(nil))
-	//m.Impl.(helpers.Mappable).RegisterInterfaces(registry)
+	//registry.RegisterInterface("mappable", (*helpers.Mappable)(nil), &Mappable{})
+	//registry.RegisterInterface("IsMappable", (*isMappable_Impl)(nil))
+	////m.Impl.(helpers.Mappable).RegisterInterfaces(registry)
 }

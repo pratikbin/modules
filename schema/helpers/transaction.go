@@ -26,4 +26,5 @@ type Transaction interface {
 	DecodeTransactionRequest(json.RawMessage) (sdkTypes.Msg, error)
 	InitializeKeeper(Mapper, Parameters, ...interface{}) Transaction
 	GetGRPCConfigurator() GRPCConfigurator
+	GetKeeper() Keeper
 }

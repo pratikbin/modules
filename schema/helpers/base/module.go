@@ -84,7 +84,7 @@ func (module module) RegisterGRPCGatewayRoutes(context client.Context, serveMux 
 		// serveMux.Handle(query.GRPCGatewayHandler(context))
 		query.GetGRPCConfigurator().ConfigureGRPCGatewayHandler(context, serveMux)
 	}
-
+	//TODO: Check if this is required
 	for _, transaction := range module.transactionsPrototype().GetList() {
 		// serveMux.Handle(query.GRPCGatewayHandler(context))
 		transaction.GetGRPCConfigurator().ConfigureGRPCGatewayHandler(context, serveMux)
@@ -185,10 +185,10 @@ func (module module) RegisterServices(configurator sdkModuleTypes.Configurator) 
 		query.GetGRPCConfigurator().ConfigureGRPCServer(configurator, query.GetKeeper())
 	}
 	//TODO: Transaction maps all requests to transactionserver and not just REST
-	//for _, transaction := range module.transactionsPrototype().GetList() {
-	//	//configurator.MsgServer().RegisterService(transaction.Service())
-	//	transaction.GetGRPCConfigurator().ConfigureGRPCServer(configurator)
-	//}
+	for _, transaction := range module.transactions.GetList() {
+		//configurator.MsgServer().RegisterService(transaction.Service())
+		transaction.GetGRPCConfigurator().ConfigureGRPCServer(configurator, transaction.GetKeeper())
+	}
 }
 func (module module) ConsensusVersion() uint64 {
 	return module.consensusVersion

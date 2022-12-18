@@ -38,6 +38,9 @@ func (transaction transaction) Service() (*grpc.ServiceDesc, interface{}) {
 
 var _ helpers.Transaction = (*transaction)(nil)
 
+func (transaction transaction) GetKeeper() helpers.Keeper {
+	return transaction.keeper
+}
 func (transaction transaction) GetGRPCConfigurator() helpers.GRPCConfigurator {
 	return transaction.Configurator
 }

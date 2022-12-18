@@ -21,7 +21,7 @@ type key struct {
 var _ helpers.Key = (*key)(nil)
 
 func (key key) RegisterInterfaces(registry types.InterfaceRegistry) {
-	registry.RegisterInterface("KeyName", (*helpers.Key)(nil))
+	//registry.RegisterInterface("KeyName", (*helpers.Key)(nil))
 }
 
 func (key key) GenerateStoreKeyBytes() []byte {

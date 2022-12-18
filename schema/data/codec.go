@@ -20,12 +20,12 @@ func RegisterCodec(codec *codec.LegacyAmino) {
 }
 
 func RegisterInterfaces(registry types.InterfaceRegistry) {
-	registry.RegisterInterface("accAddress", (*AccAddressData)(nil), nil)
-	registry.RegisterInterface("booleanData", (*BooleanData)(nil), nil)
-	registry.RegisterInterface("Data", (*Data)(nil), nil)
-	registry.RegisterInterface("DecData", (*DecData)(nil), nil)
-	registry.RegisterInterface("heightData", (*HeightData)(nil), nil)
-	registry.RegisterInterface("idData", (*IDData)(nil), nil)
-	registry.RegisterInterface("ListData", (*ListData)(nil), nil)
-	registry.RegisterInterface("StringData", (*StringData)(nil), nil)
+	//registry.RegisterInterface("accAddress", (*AccAddressData)(nil), nil)
+	//registry.RegisterInterface("booleanData", (*BooleanData)(nil), nil)
+	//registry.RegisterInterface("Data", (*Data)(nil), nil)
+	//registry.RegisterInterface("DecData", (*DecData)(nil), nil)
+	//registry.RegisterInterface("heightData", (*HeightData)(nil), nil)
+	//registry.RegisterInterface("idData", (*IDData)(nil), nil)
+	//registry.RegisterInterface("ListData", (*ListData)(nil), nil)
+	//registry.RegisterInterface("StringData", (*StringData)(nil), nil)
 }

@@ -20,7 +20,7 @@ type metasKey struct {
 var _ helpers.Key = (*metasKey)(nil)
 
 func (key metasKey) RegisterInterfaces(registry types.InterfaceRegistry) {
-	registry.RegisterInterface("KeyName", (*helpers.Key)(nil))
+	//registry.RegisterInterface("KeyName", (*helpers.Key)(nil))
 }
 
 func (key metasKey) GenerateStoreKeyBytes() []byte {
