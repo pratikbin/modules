@@ -45,7 +45,7 @@ func (mapper mapper) Read(context sdkTypes.Context, key helpers.Key) helpers.Map
 
 	var mappable = Mappable{}
 
-	mapper.codec.UnmarshalInterface(Bytes, &mappable)
+	mapper.codec.Unmarshal(Bytes, &mappable)
 	if reflect.DeepEqual(mappable, Mappable{}) {
 		return nil
 	}

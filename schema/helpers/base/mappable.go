@@ -16,6 +16,7 @@ func (m *Mappable) GetKey() helpers.Key {
 func (m *Mappable) RegisterCodec(amino *codec.LegacyAmino) {
 	schema.RegisterModuleConcrete(amino, Mappable{})
 	amino.RegisterInterface((*isMappable_Impl)(nil), nil)
+	schema.RegisterModuleConcrete(amino, Mappable_DataMappable{})
 }
 
 func (m *Mappable) RegisterInterfaces(registry types.InterfaceRegistry) {
