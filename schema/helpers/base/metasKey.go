@@ -33,25 +33,25 @@ func (key metasKey) IsPartial() bool {
 	return key.ID.(*base.ID).GetDataID().HashId == nil
 }
 func (key metasKey) Equals(compareKey helpers.Key) bool {
-	if CompareKey, err := keyFromInterface(compareKey); err != nil {
+	if CompareKey, err := keyFromInterface(compareKey.(*metasKey)); err != nil {
 		return false
 	} else {
 		return key.ID.Compare(CompareKey.ID) == 0
 	}
 }
-func keyFromInterface(i interface{}) (metasKey, error) {
+func keyFromInterface(i interface{}) (*metasKey, error) {
 	switch value := i.(type) {
-	case metasKey:
+	case *metasKey:
 		return value, nil
 	default:
-		return metasKey{}, constants.MetaDataError
+		return &metasKey{}, constants.MetaDataError
 	}
 }
 
 func NewKey(dataID ids.ID) helpers.Key {
-	return metasKey{
+	return &metasKey{
 		ID: dataID,
 	}
 }
 
-func Prototype() helpers.Key { return metasKey{} }
+func PrototypeMetasKey() helpers.Key { return &metasKey{} }
