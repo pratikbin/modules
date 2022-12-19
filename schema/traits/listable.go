@@ -8,6 +8,9 @@ type Listable interface {
 	// * panic if compared with Listable of different type
 	// ***** TODO remove panic on compare with different type
 	Compare(Listable) int
+	Size() int
+	Unmarshal([]byte) error
+	MarshalTo([]byte) (int, error)
 }
 
 // type listable traits.Listable

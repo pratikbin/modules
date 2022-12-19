@@ -1,0 +1,8 @@
+syntax = "proto3";
+package base;
+
+import "gogoproto/gogo.proto";
+
+message Listable {
+  bytes listable = 1 [(gogoproto.customtype) = "github.com/AssetMantle/modules/schema/traits.Listable", (gogoproto.nullable) = false];
+}

@@ -8,46 +8,49 @@ import (
 	"github.com/AssetMantle/modules/schema/traits"
 )
 
-type propertyList struct {
-	lists.List
-}
+//type propertyList struct {
+//	lists.List
+//}
 
-var _ lists.PropertyList = (*propertyList)(nil)
+var _ lists.PropertyList = (*PropertyList)(nil)
 
-func (propertyList propertyList) GetProperty(propertyID ids.PropertyID) properties.Property {
-	if i, found := propertyList.Search(base.NewEmptyMesaPropertyFromID(propertyID)); found {
+func (propertyList *PropertyList) GetProperty(propertyID ids.PropertyID) properties.Property {
+	list := propertyList.GetPropertyList()
+	if i, found := list.(lists.List).Search(base.NewEmptyMesaPropertyFromID(propertyID)); found {
 		return propertyList.GetList()[i]
 	}
 
 	return nil
 }
-func (propertyList propertyList) GetList() []properties.Property {
-	Properties := make([]properties.Property, propertyList.List.Size())
-	for i, listable := range propertyList.List.Get() {
-		Properties[i] = listable.(properties.Property)
+
+func (propertyList *PropertyList) GetPropertyList() []properties.Property {
+	Properties := make([]properties.Property, len(propertyList.GetList()))
+	for i, listable := range propertyList.GetList() {
+		Properties[i] = listable.Impl.(properties.Property)
 	}
 	return Properties
 }
-func (propertyList propertyList) GetPropertyIDList() lists.IDList {
+
+func (propertyList *PropertyList) GetPropertyIDList() lists.IDList {
 	propertyIDList := NewIDList()
 	for _, property := range propertyList.GetList() {
 		propertyIDList = propertyIDList.Add(property.GetID())
 	}
 	return propertyIDList
 }
-func (propertyList propertyList) Add(properties ...properties.Property) lists.PropertyList {
+func (propertyList *PropertyList) Add(properties ...properties.Property) lists.PropertyList {
 	propertyList.List = propertyList.List.Add(propertiesToListables(properties...)...)
 	return propertyList
 }
-func (propertyList propertyList) Remove(properties ...properties.Property) lists.PropertyList {
+func (propertyList *PropertyList) Remove(properties ...properties.Property) lists.PropertyList {
 	propertyList.List = propertyList.List.Remove(propertiesToListables(properties...)...)
 	return propertyList
 }
-func (propertyList propertyList) Mutate(properties ...properties.Property) lists.PropertyList {
+func (propertyList *PropertyList) Mutate(properties ...properties.Property) lists.PropertyList {
 	propertyList.List = propertyList.List.Mutate(propertiesToListables(properties...)...)
 	return propertyList
 }
-func (propertyList propertyList) ScrubData() lists.PropertyList {
+func (propertyList *PropertyList) ScrubData() lists.PropertyList {
 	newPropertyList := NewPropertyList()
 	for _, listable := range propertyList.List.Get() {
 		if property := listable.(properties.Property); property.IsMeta() {
